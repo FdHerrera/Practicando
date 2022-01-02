@@ -24,6 +24,12 @@ public class Report {
     private String subtitle;
     private String body;
     private Date createdAt;
+    @ManyToOne
+    @JoinColumn(name = "section_id")
+    private Section section;
+    @ManyToOne
+    @JoinColumn(name = "tag_id")
+    private Tag tag;
     @OneToMany(mappedBy = "report")
     private Set<Photo> photos;
 

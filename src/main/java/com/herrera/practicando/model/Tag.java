@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -20,5 +21,7 @@ public class Tag {
     private Long id;
 
     private String name;
+    @OneToMany(mappedBy = "tag")
+    private List<Report> reports;
 
 }

@@ -3,7 +3,7 @@ package com.herrera.practicando.service.impl;
 import com.herrera.practicando.dto.request.UserRequest;
 import com.herrera.practicando.dto.response.UserResponse;
 import com.herrera.practicando.exceptionhandler.exceptions.NotFoundException;
-import com.herrera.practicando.exceptionhandler.exceptions.UsernameNotAvailableException;
+import com.herrera.practicando.exceptionhandler.exceptions.NotAvailableException;
 import com.herrera.practicando.model.AppUser;
 import com.herrera.practicando.model.Role;
 import com.herrera.practicando.model.User;
@@ -21,6 +21,8 @@ import org.springframework.stereotype.Service;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static com.herrera.practicando.utils.Thrower.throwException;
+
 @Service
 @AllArgsConstructor
 public class UserServiceImpl implements IUserService {
@@ -34,7 +36,7 @@ public class UserServiceImpl implements IUserService {
     public UserResponse signUpUser(UserRequest request) {
         userRepo.findByUsername(request.getUsername())
                 .ifPresent( user -> throwException(
-                        new UsernameNotAvailableException("This username is not available", user.getUsername())
+                        new NotAvailableException("This username is not available", user.getUsername())
                 ));
         String encodedPass = encoder.encode(request.getPassword());
         User newUser = User.builder()
@@ -67,8 +69,5 @@ public class UserServiceImpl implements IUserService {
         );
     }
 
-    private void throwException(RuntimeException toThrow){
-        throw toThrow;
-    }
 
 }
