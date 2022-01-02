@@ -16,7 +16,7 @@ public class Beans {
 
     @Bean
     public PasswordEncoder encoder(){
-        return new BCryptPasswordEncoder(100);
+        return new BCryptPasswordEncoder(10);
     }
 
 }
