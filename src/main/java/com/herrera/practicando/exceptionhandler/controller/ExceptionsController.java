@@ -1,6 +1,8 @@
 package com.herrera.practicando.exceptionhandler.controller;
 
+import com.herrera.practicando.exceptionhandler.exceptions.NotFoundException;
 import com.herrera.practicando.exceptionhandler.response.FailedValidationsResponse;
+import com.herrera.practicando.exceptionhandler.response.NotFoundResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
@@ -20,6 +22,13 @@ public class ExceptionsController {
         return exception.getBindingResult().getAllErrors()
                 .stream().map(this::mapResponse)
                 .collect(Collectors.toList());
+    }
+
+    @ExceptionHandler
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public NotFoundResponse notFoundHandler(NotFoundException exception){
+        return new NotFoundResponse(exception.getMessage(), exception.getNotFound());
     }
 
     private FailedValidationsResponse mapResponse(ObjectError objectError) {
