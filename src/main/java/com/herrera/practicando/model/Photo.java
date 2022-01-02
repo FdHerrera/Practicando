@@ -6,23 +6,23 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.util.Set;
 
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "ROLE")
-public class Role implements Serializable {
+@AllArgsConstructor
+public class Photo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "role_id")
+    @Column(name = "photo_id")
     private Long id;
-    private String roleName;
-    @ManyToMany(mappedBy = "roles")
-    private Set<User> users;
+    private String photography;
+    private String footer;
+    private String paragraph;
+    @ManyToOne
+    @JoinColumn(name = "report_id")
+    private Report report;
 
 }
