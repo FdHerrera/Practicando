@@ -19,6 +19,8 @@ public class User implements Serializable {
     @Column(name = "user_id")
     private Long id;
     private String username;
+    private String firstName;
+    private String lastName;
     private String password;
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
