@@ -1,5 +1,6 @@
 package com.herrera.Practicando.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -9,6 +10,7 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 @Data
+@AllArgsConstructor
 public class AppUser implements UserDetails {
 
     private User user;
