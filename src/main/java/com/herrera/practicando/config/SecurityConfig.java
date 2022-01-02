@@ -1,7 +1,9 @@
 package com.herrera.practicando.config;
 
 import com.herrera.practicando.config.jwt.JwtAuthenticationFilter;
+import com.herrera.practicando.config.jwt.JwtAuthorizationFilter;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -10,23 +12,24 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         JwtAuthenticationFilter jwtAuthFilter = new JwtAuthenticationFilter(authenticationManager());
-        jwtAuthFilter.setFilterProcessesUrl("/login");
-
         http
-                .csrf().disable()
-                .formLogin().and()
-                .authorizeRequests().antMatchers("/users/sign-up")
-                .permitAll()
-                .anyRequest()
-                .permitAll().and()
+                .addFilterBefore(jwtAuthFilter, JwtAuthenticationFilter.class);
+        http
+                .cors().and()
+                .csrf().disable().authorizeRequests()
+                .antMatchers("/test").access("hasAnyRole('ROLE_ADMIN')")
+                .antMatchers("/users/sign-up").permitAll()
+                .anyRequest().authenticated()
+                .and().addFilter(new JwtAuthorizationFilter(authenticationManager()))
+                .formLogin()
+                .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http
-                .addFilter(jwtAuthFilter);
     }
 
     @Override
