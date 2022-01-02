@@ -1,7 +1,9 @@
 package com.herrera.practicando.service.impl;
 
-import com.herrera.practicando.dto.ReportRequest;
+import com.herrera.practicando.dto.request.ReportRequest;
+import com.herrera.practicando.dto.request.SectionRequest;
 import com.herrera.practicando.dto.response.ReportResponse;
+import com.herrera.practicando.dto.response.SectionResponse;
 import com.herrera.practicando.exceptionhandler.exceptions.NotAvailableException;
 import com.herrera.practicando.exceptionhandler.exceptions.NotFoundException;
 import com.herrera.practicando.model.Report;
@@ -19,7 +21,6 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.Instant;
 import java.util.Date;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor

@@ -1,4 +1,4 @@
-package com.herrera.practicando.dto;
+package com.herrera.practicando.dto.request;
 
 import com.herrera.practicando.dto.request.PhotoRequest;
 import lombok.AllArgsConstructor;
