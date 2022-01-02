@@ -39,6 +39,8 @@ public class UserServiceImpl implements IUserService {
         String encodedPass = encoder.encode(request.getPassword());
         User newUser = User.builder()
                 .username(request.getUsername())
+                .firstName(request.getFirstName())
+                .lastName(request.getLastName())
                 .password(encodedPass)
                 .roles(loadDefaultRoles()).build();
         userRepo.save(newUser);
