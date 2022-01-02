@@ -16,6 +16,7 @@ import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.Instant;
 import java.util.Date;
 import java.util.Optional;
@@ -35,11 +36,12 @@ public class ReportServiceImpl implements IReportService {
     }
 
     @Override
+    @Transactional
     public ReportResponse createReportWithSectionAndTag(Long sectionId, Long tagId, ReportRequest request) {
         reportRepo.findByTitle(request.getTitle())
                 .ifPresent(report -> Thrower.throwException(new NotAvailableException("Probably report already exists", report.getTitle())));
         Section section = sectionRepo.findById(sectionId)
-                .orElseThrow(() -> new NotFoundException("Not found an exception with id" + sectionId, "Unexisting tag"));
+                .orElseThrow(() -> new NotFoundException("Not found a section with id" + sectionId, "Unexisting tag"));
         Tag tag = tagRepo.findById(tagId)
                 .orElseThrow(() -> new NotFoundException("Not found a tag with id" + tagId, "Unexisting tag"));
         Report newReport = mapper.map(request, Report.class);
