@@ -20,8 +20,10 @@ public class Report {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String title;
+    private String subtitle;
+    private String body;
     private Date createdAt;
-
     @OneToMany(mappedBy = "report")
     private Set<Photo> photos;
 
