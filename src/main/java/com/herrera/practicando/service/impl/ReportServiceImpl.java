@@ -42,9 +42,9 @@ public class ReportServiceImpl implements IReportService {
         reportRepo.findByTitle(request.getTitle())
                 .ifPresent(report -> Thrower.throwException(new NotAvailableException("Probably report already exists", report.getTitle())));
         Section section = sectionRepo.findById(sectionId)
-                .orElseThrow(() -> new NotFoundException("Not found a section with id" + sectionId, "Unexisting tag"));
+                .orElseThrow(() -> new NotFoundException("Section not found", sectionId.toString()));
         Tag tag = tagRepo.findById(tagId)
-                .orElseThrow(() -> new NotFoundException("Not found a tag with id" + tagId, "Unexisting tag"));
+                .orElseThrow(() -> new NotFoundException("Tag not found", tagId.toString()));
         Report newReport = mapper.map(request, Report.class);
         newReport.setCreatedAt(Date.from(Instant.now()));
         newReport.setSection(section);

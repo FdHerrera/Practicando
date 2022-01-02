@@ -33,6 +33,7 @@ public class TagServiceImpl implements ITagService {
         Section sectionFound = sectionRepo.findById(sectionId).orElseThrow(() -> new NotFoundException("Section not found", sectionId.toString()));
         Tag newTag = mapper.map(request, Tag.class);
         newTag.setSection(sectionFound);
+        tagRepo.save(newTag);
         return mapper.map(newTag, TagResponse.class);
     }
 }

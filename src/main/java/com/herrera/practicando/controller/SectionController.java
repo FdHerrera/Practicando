@@ -33,7 +33,7 @@ public class SectionController {
 
     @PostMapping(path = "/{sectionId}")
     public ResponseEntity<TagResponse> createTagInSection(@PathVariable("sectionId") Long sectionId,
-                                                          @RequestBody TagRequest request){
+                                                          @RequestBody @Valid TagRequest request){
         TagResponse response = tagService.createTagWithSection(sectionId, request);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
