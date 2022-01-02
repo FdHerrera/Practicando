@@ -24,6 +24,8 @@ public class Section {
 
     private String name;
     @OneToMany(mappedBy = "section")
+    private List<Tag> tags;
+    @OneToMany(mappedBy = "section")
     private List<Report> reports;
 
 }

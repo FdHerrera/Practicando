@@ -21,6 +21,9 @@ public class Tag {
     private Long id;
 
     private String name;
+    @ManyToOne
+    @JoinColumn(name = "section_id", referencedColumnName = "section_id")
+    private Section section;
     @OneToMany(mappedBy = "tag")
     private List<Report> reports;
 
