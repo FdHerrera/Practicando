@@ -1,7 +1,8 @@
 package com.herrera.practicando.dto.response;
 
+import com.herrera.practicando.dto.PhotoDto;
+import com.herrera.practicando.dto.SectionDto;
 import com.herrera.practicando.dto.UserDto;
-import com.herrera.practicando.dto.request.PhotoRequest;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,5 +15,7 @@ public class ReportResponse {
     private String title;
     private String subtitle;
     private String body;
-    private Set<PhotoRequest> photos;
+    private SectionDto section;
+    private TagResponse tag;
+    private Set<PhotoDto> photos;
 }
