@@ -23,6 +23,8 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.Instant;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -33,6 +35,13 @@ public class ReportServiceImpl implements IReportService {
     private final SectionRepo sectionRepo;
     private final TagRepo tagRepo;
     private final ModelMapper mapper;
+
+    @Override
+    public List<ReportResponse> getAllReports() {
+        return reportRepo.findAll().stream()
+                .map(report -> mapper.map(report, ReportResponse.class))
+                .collect(Collectors.toList());
+    }
 
     @Override
     public ReportResponse createReport(ReportRequest request) {
