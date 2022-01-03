@@ -1,9 +1,7 @@
 package com.herrera.practicando.service.impl;
 
 import com.herrera.practicando.dto.request.ReportRequest;
-import com.herrera.practicando.dto.request.SectionRequest;
 import com.herrera.practicando.dto.response.ReportResponse;
-import com.herrera.practicando.dto.response.SectionResponse;
 import com.herrera.practicando.exceptionhandler.exceptions.NotAvailableException;
 import com.herrera.practicando.exceptionhandler.exceptions.NotFoundException;
 import com.herrera.practicando.model.Report;

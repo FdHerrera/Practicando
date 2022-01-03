@@ -27,10 +27,10 @@ public class Report {
     private String subtitle;
     private String body;
     private Date createdAt;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "section_id")
     private Section section;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tag_id")
     private Tag tag;
     @OneToMany(mappedBy = "report")

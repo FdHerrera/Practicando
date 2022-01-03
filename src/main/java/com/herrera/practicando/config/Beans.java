@@ -1,5 +1,6 @@
 package com.herrera.practicando.config;
 
+import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,7 +12,13 @@ public class Beans {
 
     @Bean
     public ModelMapper modelMapper(){
-        return new ModelMapper();
+        ModelMapper mapper = new ModelMapper();
+        mapper.getConfiguration()
+                .setSkipNullEnabled(true)
+                .setPreferNestedProperties(false)
+                .setDeepCopyEnabled(false)
+                .setPropertyCondition(Conditions.isNotNull());
+        return mapper;
     }
 
     @Bean

@@ -23,9 +23,9 @@ public class Section {
     private Long id;
 
     private String name;
-    @OneToMany(mappedBy = "section")
+    @OneToMany(mappedBy = "section", fetch = FetchType.LAZY)
     private List<Tag> tags;
-    @OneToMany(mappedBy = "section")
+    @OneToMany(mappedBy = "section", fetch = FetchType.LAZY)
     private List<Report> reports;
 
 }
