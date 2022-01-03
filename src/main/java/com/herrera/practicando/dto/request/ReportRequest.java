@@ -1,8 +1,8 @@
 package com.herrera.practicando.dto.request;
 
-import com.herrera.practicando.dto.request.PhotoRequest;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
@@ -12,6 +12,7 @@ import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 @Validated
 public class ReportRequest {

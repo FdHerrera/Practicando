@@ -24,7 +24,7 @@ public class Tag {
     @ManyToOne
     @JoinColumn(name = "section_id", referencedColumnName = "section_id")
     private Section section;
-    @OneToMany(mappedBy = "tag")
+    @OneToMany(mappedBy = "tag", fetch = FetchType.LAZY)
     private List<Report> reports;
 
 }
