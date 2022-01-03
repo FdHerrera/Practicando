@@ -12,8 +12,10 @@ import com.herrera.practicando.model.Tag;
 import com.herrera.practicando.repository.ReportRepo;
 import com.herrera.practicando.repository.SectionRepo;
 import com.herrera.practicando.repository.TagRepo;
+import com.herrera.practicando.repository.UserRepo;
 import com.herrera.practicando.service.IReportService;
 import com.herrera.practicando.utils.Thrower;
+import com.herrera.practicando.utils.UserGetter;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class ReportServiceImpl implements IReportService {
 
+    private final UserRepo userRepo;
     private final ReportRepo reportRepo;
     private final SectionRepo sectionRepo;
     private final TagRepo tagRepo;
@@ -49,6 +52,7 @@ public class ReportServiceImpl implements IReportService {
         newReport.setCreatedAt(Date.from(Instant.now()));
         newReport.setSection(section);
         newReport.setTag(tag);
+        newReport.setCreator(userRepo.findByUsername(UserGetter.getUserFromContext()).orElseThrow());
         reportRepo.save(newReport);
         return mapper.map(newReport, ReportResponse.class);
     }
