@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/sections")
@@ -24,6 +25,12 @@ public class SectionController {
     private final IReportService reportService;
     private final ISectionService sectionService;
     private final ITagService tagService;
+
+    @GetMapping(path = "/{sectionId}")
+    public ResponseEntity<List<ReportResponse>> getReportsBySection(@PathVariable("sectionId") Long sectionId){
+        List<ReportResponse> response = sectionService.getReportsBySection(sectionId);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
     @PostMapping
     public ResponseEntity<SectionResponse> createSection(@RequestBody @Valid SectionRequest request){

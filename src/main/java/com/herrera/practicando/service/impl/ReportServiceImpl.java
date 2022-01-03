@@ -40,7 +40,7 @@ public class ReportServiceImpl implements IReportService {
     @Transactional
     public ReportResponse createReportWithSectionAndTag(Long sectionId, Long tagId, ReportRequest request) {
         reportRepo.findByTitle(request.getTitle())
-                .ifPresent(report -> Thrower.throwException(new NotAvailableException("Probably report already exists", report.getTitle())));
+                .ifPresent(report -> Thrower.throwException(new NotAvailableException("Report with this title already exists", report.getTitle())));
         Section section = sectionRepo.findById(sectionId)
                 .orElseThrow(() -> new NotFoundException("Section not found", sectionId.toString()));
         Tag tag = tagRepo.findById(tagId)
@@ -49,6 +49,7 @@ public class ReportServiceImpl implements IReportService {
         newReport.setCreatedAt(Date.from(Instant.now()));
         newReport.setSection(section);
         newReport.setTag(tag);
+        reportRepo.save(newReport);
         return mapper.map(newReport, ReportResponse.class);
     }
 

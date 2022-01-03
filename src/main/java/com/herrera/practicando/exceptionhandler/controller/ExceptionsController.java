@@ -1,8 +1,12 @@
 package com.herrera.practicando.exceptionhandler.controller;
 
+import com.auth0.jwt.exceptions.TokenExpiredException;
+import com.herrera.practicando.exceptionhandler.exceptions.NotAvailableException;
 import com.herrera.practicando.exceptionhandler.exceptions.NotFoundException;
 import com.herrera.practicando.exceptionhandler.response.FailedValidationsResponse;
+import com.herrera.practicando.exceptionhandler.response.NotAvailableResponse;
 import com.herrera.practicando.exceptionhandler.response.NotFoundResponse;
+import com.herrera.practicando.exceptionhandler.response.TokenExceptionResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
@@ -22,6 +26,13 @@ public class ExceptionsController {
         return exception.getBindingResult().getAllErrors()
                 .stream().map(this::mapResponse)
                 .collect(Collectors.toList());
+    }
+
+    @ExceptionHandler
+    @ResponseBody
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public NotAvailableResponse unavailableHandler(NotAvailableException exception){
+        return new NotAvailableResponse(exception.getMessage(), exception.getNotAvailable());
     }
 
     @ExceptionHandler
