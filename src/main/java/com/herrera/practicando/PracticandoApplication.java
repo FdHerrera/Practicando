@@ -1,4 +1,4 @@
-package com.herrera.Practicando;
+package com.herrera.practicando;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
