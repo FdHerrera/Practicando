@@ -12,6 +12,7 @@ import com.herrera.practicando.service.ITagService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -33,12 +34,14 @@ public class SectionController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<SectionResponse> createSection(@RequestBody @Valid SectionRequest request){
         SectionResponse response = sectionService.createSection(request);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @PostMapping(path = "/{sectionId}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<TagResponse> createTagInSection(@PathVariable("sectionId") Long sectionId,
                                                           @RequestBody @Valid TagRequest request){
         TagResponse response = tagService.createTagWithSection(sectionId, request);
@@ -46,6 +49,7 @@ public class SectionController {
     }
 
     @PostMapping(path = "/{sectionId}/{tagId}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<ReportResponse> createReportInSectionWithTag(@PathVariable("sectionId") Long sectionId,
                                                                        @PathVariable("tagId") Long tagId,
                                                                        @RequestBody @Valid ReportRequest request){

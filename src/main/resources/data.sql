@@ -1,0 +1,6 @@
+INSERT INTO role (role_id, role_name) VALUES (1, 'ROLE_USER')
+INSERT INTO role (role_id, role_name) VALUES (2, 'ROLE_ADMIN')
+INSERT INTO user (user_id, username,first_name, last_name, password) VALUES (1, 'fdherrera@gmail.com','Federico', 'Herrera', 12345)
+INSERT INTO user (user_id, username,first_name, last_name, password) VALUES (2, 'otroemail@repiola.com','Pepito', 'Longaniza', 12345)
+INSERT INTO user_roles VALUES (1,1)
+INSERT INTO user_roles VALUES (2,2)
