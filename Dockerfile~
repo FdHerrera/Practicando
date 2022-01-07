@@ -6,4 +6,4 @@ COPY Executable.jar /
 
 EXPOSE 8080
 
-CMD java -jar Executable.jar
+CMD java -jar hello-world.jar

@@ -1,5 +1,9 @@
-So with docker previously installed
-In cmd do: 
-docker build Dockerfile
+So with docker previously installed open a console and do:
 
-docker run --publish 8080:8080 java-docker
+docker build -t alto-nombre .
+
+Final "."(dot) is important
+
+Then run :
+
+docker run -d -p 8080:8080 alto-nombre
