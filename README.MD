@@ -1,3 +1,10 @@
+This api is made to be run from Docker. You do not need Java nor Maven to run it, since 
+it builds a docker image with all dependencies needed and running in a container.
+
+If you already have Java 11 and Maven, you can clone and run it as any Java app.
+
+Otherwise
+
 So with docker previously installed open a console and do:
 ````
 docker build -t alto-nombre .
